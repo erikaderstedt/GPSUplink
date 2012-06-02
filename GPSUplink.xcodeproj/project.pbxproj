@@ -1,0 +1,297 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03FA63EC157A281E00EF4ACF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03FA63EB157A281E00EF4ACF /* Cocoa.framework */; };
+		03FA63F6157A281E00EF4ACF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03FA63F4157A281E00EF4ACF /* InfoPlist.strings */; };
+		03FA63F8157A281E00EF4ACF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FA63F7157A281E00EF4ACF /* main.m */; };
+		03FA63FC157A281E00EF4ACF /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 03FA63FA157A281E00EF4ACF /* Credits.rtf */; };
+		03FA63FF157A281E00EF4ACF /* ASAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FA63FE157A281E00EF4ACF /* ASAppDelegate.m */; };
+		03FA6402157A281E00EF4ACF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03FA6400157A281E00EF4ACF /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		03FA63E7157A281E00EF4ACF /* GPSUplink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSUplink.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03FA63EB157A281E00EF4ACF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		03FA63EE157A281E00EF4ACF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		03FA63EF157A281E00EF4ACF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		03FA63F0157A281E00EF4ACF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		03FA63F3157A281E00EF4ACF /* GPSUplink-Info.plist */ = {isa = PBXFileReference; path = "GPSUplink-Info.plist"; sourceTree = "<group>"; };
+		03FA63F5157A281E00EF4ACF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03FA63F7157A281E00EF4ACF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		03FA63F9157A281E00EF4ACF /* GPSUplink-Prefix.pch */ = {isa = PBXFileReference; path = "GPSUplink-Prefix.pch"; sourceTree = "<group>"; };
+		03FA63FB157A281E00EF4ACF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		03FA63FD157A281E00EF4ACF /* ASAppDelegate.h */ = {isa = PBXFileReference; path = ASAppDelegate.h; sourceTree = "<group>"; };
+		03FA63FE157A281E00EF4ACF /* ASAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASAppDelegate.m; sourceTree = "<group>"; };
+		03FA6401157A281E00EF4ACF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03FA63E4157A281E00EF4ACF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03FA63EC157A281E00EF4ACF /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03FA63DC157A281E00EF4ACF = {
+			isa = PBXGroup;
+			children = (
+				03FA63F1157A281E00EF4ACF /* GPSUplink */,
+				03FA63EA157A281E00EF4ACF /* Frameworks */,
+				03FA63E8157A281E00EF4ACF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		03FA63E8157A281E00EF4ACF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03FA63E7157A281E00EF4ACF /* GPSUplink.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		03FA63EA157A281E00EF4ACF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				03FA63EB157A281E00EF4ACF /* Cocoa.framework */,
+				03FA63ED157A281E00EF4ACF /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		03FA63ED157A281E00EF4ACF /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				03FA63EE157A281E00EF4ACF /* AppKit.framework */,
+				03FA63EF157A281E00EF4ACF /* CoreData.framework */,
+				03FA63F0157A281E00EF4ACF /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		03FA63F1157A281E00EF4ACF /* GPSUplink */ = {
+			isa = PBXGroup;
+			children = (
+				03FA63FD157A281E00EF4ACF /* ASAppDelegate.h */,
+				03FA63FE157A281E00EF4ACF /* ASAppDelegate.m */,
+				03FA6400157A281E00EF4ACF /* MainMenu.xib */,
+				03FA63F2157A281E00EF4ACF /* Supporting Files */,
+			);
+			path = GPSUplink;
+			sourceTree = "<group>";
+		};
+		03FA63F2157A281E00EF4ACF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				03FA63F3157A281E00EF4ACF /* GPSUplink-Info.plist */,
+				03FA63F4157A281E00EF4ACF /* InfoPlist.strings */,
+				03FA63F7157A281E00EF4ACF /* main.m */,
+				03FA63F9157A281E00EF4ACF /* GPSUplink-Prefix.pch */,
+				03FA63FA157A281E00EF4ACF /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		03FA63E6157A281E00EF4ACF /* GPSUplink */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03FA6405157A281E00EF4ACF /* Build configuration list for PBXNativeTarget "GPSUplink" */;
+			buildPhases = (
+				03FA63E3157A281E00EF4ACF /* Sources */,
+				03FA63E4157A281E00EF4ACF /* Frameworks */,
+				03FA63E5157A281E00EF4ACF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GPSUplink;
+			productName = GPSUplink;
+			productReference = 03FA63E7157A281E00EF4ACF /* GPSUplink.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		03FA63DE157A281E00EF4ACF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AS;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Aderstedt Software AB";
+			};
+			buildConfigurationList = 03FA63E1157A281E00EF4ACF /* Build configuration list for PBXProject "GPSUplink" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 03FA63DC157A281E00EF4ACF;
+			productRefGroup = 03FA63E8157A281E00EF4ACF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				03FA63E6157A281E00EF4ACF /* GPSUplink */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		03FA63E5157A281E00EF4ACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03FA63F6157A281E00EF4ACF /* InfoPlist.strings in Resources */,
+				03FA63FC157A281E00EF4ACF /* Credits.rtf in Resources */,
+				03FA6402157A281E00EF4ACF /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		03FA63E3157A281E00EF4ACF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03FA63F8157A281E00EF4ACF /* main.m in Sources */,
+				03FA63FF157A281E00EF4ACF /* ASAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		03FA63F4157A281E00EF4ACF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03FA63F5157A281E00EF4ACF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		03FA63FA157A281E00EF4ACF /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03FA63FB157A281E00EF4ACF /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		03FA6400157A281E00EF4ACF /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03FA6401157A281E00EF4ACF /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		03FA6403157A281E00EF4ACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		03FA6404157A281E00EF4ACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		03FA6406157A281E00EF4ACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GPSUplink/GPSUplink-Prefix.pch";
+				INFOPLIST_FILE = "GPSUplink/GPSUplink-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		03FA6407157A281E00EF4ACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GPSUplink/GPSUplink-Prefix.pch";
+				INFOPLIST_FILE = "GPSUplink/GPSUplink-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03FA63E1157A281E00EF4ACF /* Build configuration list for PBXProject "GPSUplink" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03FA6403157A281E00EF4ACF /* Debug */,
+				03FA6404157A281E00EF4ACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03FA6405157A281E00EF4ACF /* Build configuration list for PBXNativeTarget "GPSUplink" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03FA6406157A281E00EF4ACF /* Debug */,
+				03FA6407157A281E00EF4ACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 03FA63DE157A281E00EF4ACF /* Project object */;
+}
