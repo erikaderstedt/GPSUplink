@@ -7,9 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "GCDAsyncSocket.h"
 
-@interface ASAppDelegate : NSObject <NSApplicationDelegate>
+@interface ASAppDelegate : NSObject <NSApplicationDelegate, GCDAsyncSocketDelegate, NSTableViewDataSource> {
+    GCDAsyncSocket *gps_gprs_host_listener;
+    NSData *endBytes;
+    
+    NSMutableArray *connectedSockets;
+}
 
 @property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSTableView *deviceTable;
+
+- (IBAction)showSelectedDevice:(id)sender;
+- (IBAction)sendGPSON:(id)sender;
 
 @end
