@@ -59,9 +59,12 @@ const unsigned char gpsTestData[30]= {
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    NSLog(@"%@ disconnected", [sock connectedHost]);
+    NSLog(@"A socket disconnected");
     @synchronized(connectedSockets) {
         [connectedSockets removeObject:sock];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.deviceTable reloadData];
+        });
     }
 }
 
@@ -89,6 +92,7 @@ const unsigned char gpsTestData[30]= {
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.deviceTable reloadData];
+            self.responseField.stringValue = device.lastResponse;
         });
         [sock writeData:response withTimeout:READ_TIMEOUT tag:1];
     } else {
@@ -147,10 +151,23 @@ const unsigned char gpsTestData[30]= {
     NSInteger r = [self.deviceTable selectedRow];
     if (r < 0 || r >= [connectedSockets count]) return;
     
+    self.responseField.stringValue = [NSString stringWithFormat:@"Sending GPSON#"];
+
     GCDAsyncSocket *socket = [connectedSockets objectAtIndex:r];
     ASRemoteDevice *device = [socket userData];
     NSData *rpackage = [device reactivationPackage];
     [socket writeData:rpackage withTimeout:10.0 tag:34];
 }
 
+- (IBAction)sendCommand:(id)sender {
+    NSInteger r = [self.deviceTable selectedRow];
+    if (r < 0 || r >= [connectedSockets count]) return;
+    
+    self.responseField.stringValue = [NSString stringWithFormat:@"Sending %@", self.commandField.stringValue];
+
+    GCDAsyncSocket *socket = [connectedSockets objectAtIndex:r];
+    ASRemoteDevice *device = [socket userData];
+    NSData *rpackage = [device packageForCommand:self.commandField.stringValue];
+    [socket writeData:rpackage withTimeout:10.0 tag:34];
+}
 @end

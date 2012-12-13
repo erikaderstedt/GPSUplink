@@ -1,0 +1,18 @@
+To set up the GT03B for your server:
+
+SERVER 0,<ip>,<port>,0#		// Configure server.
+TIMER 60,5#			// 60 s between LBS packages, 5 s between GPS packages
+GMT E,1#			// Configure time-zone (in this case to CET).
+
+This software is made to run on OS X. Be sure to open up your firewall to whatever port is used.
+The application is a work-in-progress and proof-of-concept. Obviously, one would need to serve
+the collected data in some way for it to be useful.
+
+Right now everything works fine, except that the unit stops sending GPS data after 60 s. I've
+managed to get it to start again by sending GPSON#, but
+* it doesn't work most of the time
+* when it does work, the unit stops sending data after a short while.
+
+My entire setup is also suffering from irritating non-reproducibility. If you have any luck,
+please let me know!
+

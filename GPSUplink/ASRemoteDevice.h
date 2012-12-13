@@ -19,6 +19,7 @@
 @property (strong) NSDate *lastActivation;
 @property (assign) NSTimeInterval accumulatedReadTimeout;
 @property (assign) NSInteger packetCounter;
+@property (strong) NSString *lastResponse;
 
 + (BOOL)validatePackage:(NSData *)data;
 - (NSData *)handlePackage:(NSData *)data;
@@ -28,5 +29,6 @@
 
 - (BOOL)shouldReactivate;
 - (NSData *)reactivationPackage;
+- (NSData *)packageForCommand:(NSString *)command;
 
 @end

@@ -1,0 +1,5 @@
+build/
+GPSUplink.xcodeproj/*
+!GPSUplink.xcodeproj/project.pbxproj
+.DS_Store
+

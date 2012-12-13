@@ -21,5 +21,8 @@
 
 - (IBAction)showSelectedDevice:(id)sender;
 - (IBAction)sendGPSON:(id)sender;
+@property (weak) IBOutlet NSTextField *responseField;
+- (IBAction)sendCommand:(id)sender;
+@property (weak) IBOutlet NSTextField *commandField;
 
 @end
