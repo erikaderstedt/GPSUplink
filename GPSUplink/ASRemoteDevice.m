@@ -483,7 +483,7 @@ double secondsToDegrees(uint32_t fiveHundredthsOfASeconds) {
     set32Bits(rbytes+PACKET_CONTENT_START+1, (uint32_t)(self.packetCounter ++));
     strncpy((char *)rbytes+PACKET_CONTENT_START+5, [command cStringUsingEncoding:NSASCIIStringEncoding], cLength);
     set16Bits(rbytes + tLength - 6, self.packetCounter - 1);
-    set16Bits(rbytes + tLength - 4, GetCrc16(rbytes + 2, 15));
+    set16Bits(rbytes + tLength - 4, GetCrc16(rbytes + 2, tLength - 6));
     rbytes[tLength - 2] = 0x0d;
     rbytes[tLength - 1] = 0x0a;
     
