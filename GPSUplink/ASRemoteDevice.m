@@ -487,7 +487,9 @@ double secondsToDegrees(uint32_t fiveHundredthsOfASeconds) {
     rbytes[tLength - 2] = 0x0d;
     rbytes[tLength - 1] = 0x0a;
     
-    return [[NSData alloc] initWithBytes:rbytes length:tLength];
+    NSData *data = [[NSData alloc] initWithBytes:rbytes length:tLength];
+    free(rbytes);
+    return data;
 }
 
 @end
