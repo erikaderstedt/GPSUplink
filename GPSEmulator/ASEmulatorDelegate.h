@@ -23,5 +23,7 @@
 - (IBAction)sendGPSPackage:(id)sender;
 - (IBAction)sendGPXFile:(id)sender;
 @property (weak) IBOutlet NSProgressIndicator *gpxTransmissionProgress;
+@property (weak) IBOutlet NSTextField *ipAddressField;
+@property (weak) IBOutlet NSTextField *portField;
 
 @end

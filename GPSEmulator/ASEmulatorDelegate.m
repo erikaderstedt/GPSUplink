@@ -60,10 +60,9 @@ unsigned char loginTestData[20] = {
         hlist = dispatch_queue_create("GPS sender", DISPATCH_QUEUE_SERIAL);
         uplinkService = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:hlist];
         NSError *error = nil;
-        NSString *host = @"localhost";
-        host = @"77.53.0.109";
-        if (![uplinkService connectToHost:host onPort:19913 error:&error]) {
-            NSLog(@"rror: %@", error);
+        NSString *host = self.ipAddressField.stringValue;
+        if (![uplinkService connectToHost:host onPort:[self.portField.stringValue integerValue] error:&error]) {
+            NSLog(@"Error: %@", error);
         }
     }
 }
