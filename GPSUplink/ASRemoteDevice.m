@@ -341,8 +341,8 @@ double secondsToDegrees(uint32_t fiveHundredthsOfASeconds) {
         malformed = YES;
     }
     
-    if (!malformed && GetCrc16(bytes + 2, length - 6)) {
-        unsigned short checksum = GetCrc16(bytes + 2, length - 6);
+    if (!malformed && GetCrc16(bytes + 2, (uint16_t)length - 6)) {
+        unsigned short checksum = GetCrc16(bytes + 2, (uint16_t)length - 6);
         // Big-endian
         unsigned short error_check = get16Bits(bytes + length - 4);
         
@@ -370,7 +370,7 @@ double secondsToDegrees(uint32_t fiveHundredthsOfASeconds) {
     }
     NSMutableString *imeiString = [NSMutableString stringWithCapacity:16];
     bytes += PACKET_CONTENT_START;
-    char *serverResponse[257];
+    char serverResponse[257];
     switch (pNumber) {
         case kGT03BLogin:            
             // IMEI
@@ -411,7 +411,7 @@ double secondsToDegrees(uint32_t fiveHundredthsOfASeconds) {
             break;
         case kGT03BServerCommandSet:
         case kGT03BServerCommandCheck:
-            strncpy(serverResponse, bytes+5, bytes[0]);
+            strncpy(serverResponse, (const char *)(bytes+5), bytes[0]);
             serverResponse[bytes[0]] = 0;
             self.lastResponse = [NSString stringWithCString:(const char *)serverResponse encoding:NSASCIIStringEncoding];
             NSLog(@"Server response: %@", self.lastResponse);
@@ -472,24 +472,60 @@ double secondsToDegrees(uint32_t fiveHundredthsOfASeconds) {
     
     unsigned char *rbytes;
     int cLength = (int)[command length];
-    int tLength = 15 + cLength;
+    int tLength = 6 + cLength;
     rbytes = calloc(tLength, sizeof(unsigned char));
     
-    rbytes[PACKET_START_BYTE1] = 0x78;
-    rbytes[PACKET_START_BYTE2] = 0x78;
-    rbytes[PACKET_LENGTH] = 10 + cLength;
-    rbytes[PACKET_PROTOCOL] = kGT03BServerCommandSet;
-    rbytes[PACKET_CONTENT_START] = 4 + cLength; // Length of command + server serial
-    set32Bits(rbytes+PACKET_CONTENT_START+1, (uint32_t)(self.packetCounter ++));
-    strncpy((char *)rbytes+PACKET_CONTENT_START+5, [command cStringUsingEncoding:NSASCIIStringEncoding], cLength);
-    set16Bits(rbytes + tLength - 6, self.packetCounter - 1);
-    set16Bits(rbytes + tLength - 4, GetCrc16(rbytes + 2, tLength - 6));
-    rbytes[tLength - 2] = 0x0d;
-    rbytes[tLength - 1] = 0x0a;
+    rbytes[0] = kGT03BServerCommandSet;
+    rbytes[1] = 4 + cLength; // Length of command + server serial
+    set32Bits(rbytes+2, (uint32_t)(self.packetCounter ++));
+    strncpy((char *)rbytes+6, [command cStringUsingEncoding:NSASCIIStringEncoding], cLength);
     
     NSData *data = [[NSData alloc] initWithBytes:rbytes length:tLength];
     free(rbytes);
-    return data;
+    return [[self class] packageForPayload:data serial:(self.packetCounter-1)];
+}
+
++ (NSData *)gpsPackageForLocation:(ASGPSLocation *)location serial:(NSInteger)serial {
+    unsigned char rbytes[21];
+
+    rbytes[0] = kGT03BGPS;
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:location.timestamp];
+    
+    rbytes[1] = [components year] - 2000;
+    rbytes[2] = [components month];
+    rbytes[3] = [components day];
+    rbytes[4] = [components hour];
+    rbytes[5] = [components minute];
+    rbytes[6] = [components second];
+    rbytes[7] = 0xCC;
+    set32Bits(rbytes + 8, (uint32_t)fabs(location.latitude * 60 * 30000));
+    set32Bits(rbytes + 12, (uint32_t)fabs(location.longitude * 60 * 30000));
+    rbytes[16] = 0; // Speed
+    rbytes[17] = 16 + ((location.longitude < 0)?8:0) + ((location.latitude < 0)?0:4);
+    rbytes[18] = 0; // Course
+    rbytes[19] = 0; // Reserved
+    rbytes[20] = 0; // Reserved
+    
+    return [self packageForPayload:[[NSData alloc] initWithBytes:rbytes length:21] serial:serial];
+}
+
++ (NSData *)packageForPayload:(NSData *)data serial:(NSInteger)serial {
+    unsigned char *rbytes;
+    rbytes = calloc([data length] + 9,1);
+    memcpy(rbytes + PACKET_PROTOCOL, [data bytes], [data length]);
+    rbytes[PACKET_START_BYTE1] = 0x78;
+    rbytes[PACKET_START_BYTE2] = 0x78;
+    rbytes[PACKET_LENGTH] = [data length] + 4; 
+    // CRC includes payload + package length+ serial
+    set16Bits(rbytes + PACKET_PROTOCOL + [data length], (uint16_t)serial);
+    set16Bits(rbytes + PACKET_PROTOCOL + [data length] + 2, GetCrc16(rbytes + PACKET_LENGTH, (int)[data length] + 3));
+    rbytes[PACKET_PROTOCOL + [data length] + 4] = 0x0d;
+    rbytes[PACKET_PROTOCOL + [data length] + 5] = 0x0a;
+
+    NSData *package = [[NSData alloc] initWithBytes:rbytes length:([data length] + 9)];
+    free(rbytes);
+    return package;
 }
 
 @end

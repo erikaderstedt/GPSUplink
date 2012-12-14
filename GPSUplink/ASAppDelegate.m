@@ -147,18 +147,6 @@ const unsigned char gpsTestData[30]= {
     }
 }
 
-- (IBAction)sendGPSON:(id)sender {
-    NSInteger r = [self.deviceTable selectedRow];
-    if (r < 0 || r >= [connectedSockets count]) return;
-    
-    self.responseField.stringValue = [NSString stringWithFormat:@"Sending GPSON#"];
-
-    GCDAsyncSocket *socket = [connectedSockets objectAtIndex:r];
-    ASRemoteDevice *device = [socket userData];
-    NSData *rpackage = [device reactivationPackage];
-    [socket writeData:rpackage withTimeout:10.0 tag:34];
-}
-
 - (IBAction)sendCommand:(id)sender {
     NSInteger r = [self.deviceTable selectedRow];
     if (r < 0 || r >= [connectedSockets count]) return;

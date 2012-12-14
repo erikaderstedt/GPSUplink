@@ -8,15 +8,25 @@
 
 #import "ASEmulatorDelegate.h"
 #import "crc_check.h"
+#import "ASGPSLocation.h"
+#import "ASRemoteDevice.h"
 
 const unsigned char _endBytes[2] = { 0x0d, 0x0a };
 
 const unsigned char gpsTestData[30]= {
-    0x78,0x78,0x19,0x10,0x0B,0x03,
-    0x1A,0x0B,0x1B,0x31,0xCC,0x02,
-    0x7A,0xC7,0xFD,0x0C,0x46,0x57,
-    0xBF,0x01,0x15,0x21,0x00,0x01,
-    0x00,0x1C,0xC6,0x07,0x0D,0x0A};
+    0x78,0x78, /* Start bit */
+    0x19, /* Length (= total length - 5) */
+    0x10, /* Protocol number */
+    0x0B,0x03,0x1A,0x0B,0x1B,0x31, // Date
+    0xCC, // GPS length & number of satellites
+    0x02,0x7A,0xC7,0xFD, // Latitude
+    0x0C,0x46,0x57,0xBF, // Longitude
+    0x01, // Speed
+    0x15,0x21, // Status / course
+    0x00,0x01, // Reserved
+    0x00,0x1C, // Serial
+    0xC6,0x07, /* CRC */
+    0x0D,0x0A}; // End bit
 
 unsigned char loginTestData[20] = {
     0x78,0x78, /* Start bit */
@@ -68,13 +78,40 @@ unsigned char loginTestData[20] = {
     [uplinkService writeData:data withTimeout:10.0 tag:23];
 }
 
+- (IBAction)sendGPXFile:(id)sender {
+    self.gpxTransmissionProgress.indeterminate = NO;
+    self.gpxTransmissionProgress.minValue = 0.0;
+    self.gpxTransmissionProgress.doubleValue = 0.0;
+
+    NSOpenPanel *op = [NSOpenPanel openPanel];
+    [op setAllowedFileTypes:@[@"gpx"]];
+    [op setAllowsMultipleSelection:NO];
+    [op beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+        NSArray *locations = [ASGPSLocation loadGPXFileAtURL:[op URL]];
+        if ([locations count] == 0) return;
+        
+        ASGPSLocation *first = [locations objectAtIndex:0];
+        ASGPSLocation *last = [locations lastObject];
+        NSTimeInterval total = [last.timestamp timeIntervalSinceDate:first.timestamp];
+        self.gpxTransmissionProgress.maxValue = (double)total;
+        dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, 0);
+        __block NSInteger serial = 200;
+        for (ASGPSLocation *location in locations) {
+            dispatch_after(dispatch_time(start,[location.timestamp timeIntervalSinceDate:first.timestamp] * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+                NSData *data = [ASRemoteDevice gpsPackageForLocation:location serial:serial++];
+                [uplinkService writeData:data withTimeout:10.0 tag:24];
+                self.gpxTransmissionProgress.doubleValue = (double)[location.timestamp timeIntervalSinceDate:first.timestamp];
+            });
+        }
+    }];
+}
+
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     [connectionButton setTitle:@"Disconnect"];
     connected = YES;
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-    NSLog(@"Wrote data with tag %ld, expecting response.", tag);
     [sock readDataToData:endBytes withTimeout:10.0 tag:1];
 }
 
@@ -100,6 +137,5 @@ unsigned char loginTestData[20] = {
     [connectionButton setTitle:@"Connect"];
     connected = NO;
 }
-
 
 @end

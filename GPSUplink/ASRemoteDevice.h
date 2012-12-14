@@ -27,8 +27,8 @@
 + (BOOL)isLoginPackage:(NSData *)data;
 - (ASGPSLocation *)lastLocation;
 
-- (BOOL)shouldReactivate;
-- (NSData *)reactivationPackage;
 - (NSData *)packageForCommand:(NSString *)command;
++ (NSData *)gpsPackageForLocation:(ASGPSLocation *)location serial:(NSInteger)serial;
++ (NSData *)packageForPayload:(NSData *)data serial:(NSInteger)serial;
 
 @end

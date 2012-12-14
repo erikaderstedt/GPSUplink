@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0365B4D6167B1D1500A7AB2A /* ASGPSLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FA6418157A7D0E00EF4ACF /* ASGPSLocation.m */; };
+		0365B4DB167B386D00A7AB2A /* ASRemoteDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FA6411157A332F00EF4ACF /* ASRemoteDevice.m */; };
 		03CC0AB215C815C400FF5DC2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03FA63EB157A281E00EF4ACF /* Cocoa.framework */; };
 		03CC0AB815C815C400FF5DC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03CC0AB615C815C400FF5DC2 /* InfoPlist.strings */; };
 		03CC0ABA15C815C400FF5DC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03CC0AB915C815C400FF5DC2 /* main.m */; };
@@ -28,6 +30,16 @@
 		03FA6412157A332F00EF4ACF /* ASRemoteDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FA6411157A332F00EF4ACF /* ASRemoteDevice.m */; };
 		03FA6419157A7D0E00EF4ACF /* ASGPSLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 03FA6418157A7D0E00EF4ACF /* ASGPSLocation.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0365B4DC167B46ED00A7AB2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03FA63DE157A281E00EF4ACF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03FA63E6157A281E00EF4ACF;
+			remoteInfo = GPSUplink;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		03CC0AB015C815C400FF5DC2 /* GPSEmulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSEmulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +204,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0365B4DD167B46ED00A7AB2A /* PBXTargetDependency */,
 			);
 			name = GPSEmulator;
 			productName = GPSEmulator;
@@ -275,6 +288,8 @@
 				03CC0AC115C815C400FF5DC2 /* ASEmulatorDelegate.m in Sources */,
 				03CC0AC915C8186300FF5DC2 /* GCDAsyncSocket.m in Sources */,
 				03CC0ACA15C8186A00FF5DC2 /* crc_check.c in Sources */,
+				0365B4D6167B1D1500A7AB2A /* ASGPSLocation.m in Sources */,
+				0365B4DB167B386D00A7AB2A /* ASRemoteDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +307,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0365B4DD167B46ED00A7AB2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03FA63E6157A281E00EF4ACF /* GPSUplink */;
+			targetProxy = 0365B4DC167B46ED00A7AB2A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		03CC0AB615C815C400FF5DC2 /* InfoPlist.strings */ = {
@@ -446,6 +469,7 @@
 				03CC0AC615C815C400FF5DC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		03FA63E1157A281E00EF4ACF /* Build configuration list for PBXProject "GPSUplink" */ = {
 			isa = XCConfigurationList;

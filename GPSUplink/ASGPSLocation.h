@@ -17,4 +17,7 @@
 
 - (NSString *)stringRepresentation;
 + (NSString *)timestampRepresentationFor:(NSDate *)timestamp ;
+
++ (NSArray *)loadGPXFileAtURL:(NSURL *)url ;
+
 @end

@@ -21,5 +21,7 @@
 - (IBAction)connect:(id)sender;
 - (IBAction)sendInitialPackage:(id)sender;
 - (IBAction)sendGPSPackage:(id)sender;
+- (IBAction)sendGPXFile:(id)sender;
+@property (weak) IBOutlet NSProgressIndicator *gpxTransmissionProgress;
 
 @end
